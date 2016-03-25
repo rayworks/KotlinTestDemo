@@ -43,7 +43,7 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
-// Don’t allow Kotlin to be used in the production app by
+// Don't allow Kotlin to be used in the production app by
 // setting the list of Kotlin source directories to an empty
 // list for all source sets except the test ones
 afterEvaluate {
