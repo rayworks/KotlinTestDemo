@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 buildscript {
-    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.1.2-3'
     repositories {
         jcenter()
     }
@@ -30,6 +30,7 @@ android {
     }
 
     sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
     }
 }
@@ -39,7 +40,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
 
     testCompile 'junit:junit:4.12'
-    testCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
@@ -53,4 +54,12 @@ afterEvaluate {
             sourceSet.kotlin.setSrcDirs([])
         }
     }
+}
+
+/**
+ * show unit test result in console:
+ * http://trickyandroid.com/gradle-tip-4-log-unit-test-execution-events-into-console/
+ */
+tasks.matching { it instanceof Test }.all {
+    testLogging.events = ["failed", "passed", "skipped"]
 }
